@@ -1,7 +1,9 @@
 ---
 - name: Install git package
   ansible.builtin.package:
-    name: git
+    name:
+      - git
+      - sudo
     state: present
 
 - name: Create issue80233 group
@@ -29,3 +31,4 @@
     version: "0.0.1"
     dest: "/var/lib/issue80233"
   become_user: issue80233
+  become: true
