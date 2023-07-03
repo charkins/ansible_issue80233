@@ -1,0 +1,7 @@
+---
+- name: Converge
+  hosts: all
+  tasks:
+    - name: "Include ansible_issue80233 role"
+      ansible.builtin.include_role:
+        name: ansible_issue80233

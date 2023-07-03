@@ -1,0 +1,31 @@
+---
+- name: Install git package
+  ansible.builtin.package:
+    name: git
+    state: present
+
+- name: Create issue80233 group
+  ansible.builtin.group:
+    name: issue80233
+    system: true
+
+- name: Create issue80233 user
+  ansible.builtin.user:
+    name: issue80233
+    group: issue80233
+    system: true
+
+- name: Create /var/lib/issue80233
+  ansible.builtin.file:
+    path: "/var/lib/issue80233"
+    owner: issue80233
+    group: issue80233
+    mode: "0755"
+    state: directory
+
+- name: Checkout ansible 0.0.1
+  ansible.builtin.git:
+    repo: "https://github.com/ansible/ansible.git"
+    version: "0.0.1"
+    dest: "/var/lib/issue80233"
+  become_user: issue80233
